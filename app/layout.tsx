@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,11 @@ export default function RootLayout({
         <div className=''>{children}</div>
         <Footer />
         <Toaster />
+        <Script
+          defer
+          src='https://cloud.umami.is/script.js'
+          data-website-id='211d6f1f-eee4-45a7-8b2c-98f9b9d6e5b1'
+        ></Script>
       </body>
     </html>
   );
