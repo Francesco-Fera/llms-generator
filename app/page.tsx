@@ -1,6 +1,7 @@
 "use client";
 
 import { PageHeader } from "@/components/common/PageHeader";
+import Hero from "@/components/features/Hero";
 import { ProgressTracker } from "@/components/features/ProgressTracker";
 import { ResultDisplay } from "@/components/features/ResultDisplay";
 import { SitemapForm } from "@/components/forms/SitemapForm";
@@ -17,10 +18,10 @@ export default function LLMSGeneratorPage() {
   } = useLLMSGenerator();
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-4'>
-      <div className='max-w-4xl mx-auto space-y-6'>
-        <PageHeader />
+    <div className=''>
+      <Hero />
 
+      <div className='max-w-4xl mx-auto space-y-6' id='generate'>
         <SitemapForm
           formData={formData}
           isProcessing={state.isProcessing}

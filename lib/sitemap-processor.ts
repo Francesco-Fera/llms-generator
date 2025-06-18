@@ -92,7 +92,6 @@ export class SitemapProcessor {
         );
       }
 
-      // Fallback to first paragraph if no meta description
       if (!description) {
         const firstP = $("main p, article p, .content p, #content p")
           .first()
@@ -120,27 +119,61 @@ export class SitemapProcessor {
       const pathname = urlObj.pathname.toLowerCase().replace(/^\/|\/$/g, "");
       const segments = pathname.split("/").filter(Boolean);
 
+      if (segments.length === 0 || segments[0] === "") {
+        return "home";
+      }
+
       for (const [section, keywords] of Object.entries(SECTION_RULES)) {
         for (const keyword of keywords) {
-          if (
-            segments.some(
-              (segment) =>
-                segment.includes(keyword) ||
-                keyword.includes(segment) ||
-                segment === keyword
-            )
-          ) {
+          if (section === "home" && keyword === "") {
+            continue;
+          }
+
+          if (segments.some((segment) => segment === keyword)) {
+            console.log(
+              `Categorized ${url} as ${section} (exact match: ${keyword})`
+            );
             return section;
           }
         }
       }
 
-      if (segments.length === 0 || segments[0] === "") {
-        return "home";
+      for (const [section, keywords] of Object.entries(SECTION_RULES)) {
+        for (const keyword of keywords) {
+          if (section === "home" && keyword === "") {
+            continue;
+          }
+
+          if (
+            segments.some((segment) => {
+              const wordBoundary = new RegExp(`\\b${keyword}\\b`, "i");
+              if (wordBoundary.test(segment)) {
+                return true;
+              }
+
+              if (
+                segment.startsWith(keyword + "-") ||
+                segment.endsWith("-" + keyword) ||
+                segment.startsWith(keyword + "_") ||
+                segment.endsWith("_" + keyword)
+              ) {
+                return true;
+              }
+
+              return false;
+            })
+          ) {
+            console.log(
+              `Categorized ${url} as ${section} (partial match: ${keyword})`
+            );
+            return section;
+          }
+        }
       }
 
       return "other";
     } catch (error) {
+      console.warn(`Error categorizing URL ${url}:`, error);
       return "other";
     }
   }
