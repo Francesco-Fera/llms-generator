@@ -1,5 +1,6 @@
 import { SitemapProcessor } from "@/lib/sitemap-processor";
 import { StreamResponse, RequestBody } from "@/lib/types";
+import { trackUsage } from "@/lib/redis";
 import type { NextRequest } from "next/server";
 import { URL } from "url";
 
@@ -39,6 +40,17 @@ export async function POST(request: NextRequest) {
 
       const processor = new SitemapProcessor(options);
       const result = await processor.processSitemap(sitemapUrl, sendUpdate);
+
+      // Track successful usage
+      await trackUsage({
+        sitemapUrl,
+        timestamp: Date.now(),
+        userAgent: request.headers.get("user-agent") || undefined,
+        ip:
+          request.headers.get("x-forwarded-for") ||
+          request.headers.get("x-real-ip") ||
+          undefined,
+      });
 
       await sendUpdate({ type: "result", content: result });
     } catch (error) {

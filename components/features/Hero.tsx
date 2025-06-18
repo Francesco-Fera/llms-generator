@@ -12,8 +12,8 @@ export default function Hero() {
           sitemap
         </h1>
         <p className='text-lg text-muted-foreground mb-8'>
-          No stress. No coding. Just drop your sitemap and get a compliant{" "}
-          <code>llms.txt</code> in seconds—for free.
+          No stress. Just drop your sitemap and get a <code>llms.txt</code> in
+          seconds.
         </p>
         <div className='flex justify-center flex-wrap gap-4'>
           <Button variant='default' size='lg' asChild>
