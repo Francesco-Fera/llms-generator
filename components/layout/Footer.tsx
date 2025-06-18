@@ -17,9 +17,8 @@ export default function Footer() {
               <span>llms.txt Generator</span>
             </Link>
             <p className='text-sm text-muted-foreground'>
-              Competitor analysis reports to find the perfect restaurant
-              location. Get data-driven insights on competition, market demand,
-              and profitability before making your move.
+              A web application that automatically generates{" "}
+              <code>llms.txt</code> files from any website's sitemap.
             </p>
           </div>
 
@@ -28,18 +27,11 @@ export default function Footer() {
             <ul className='space-y-2'>
               <li>
                 <Link
-                  href={`#`}
+                  href={"https://llmstxt.org/"}
+                  target='_blank'
                   className='text-sm hover:text-primary transition-colors'
                 >
-                  About llms.tx
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`#`}
-                  className='text-sm hover:text-primary transition-colors'
-                >
-                  About AI SEO
+                  llmstxt.org
                 </Link>
               </li>
             </ul>
@@ -50,7 +42,7 @@ export default function Footer() {
             <ul className='space-y-2'>
               <li>
                 <Link
-                  href={`#`}
+                  href={`https://github.com/Francesco-Fera/llms-generator/`}
                   className='text-sm hover:text-primary transition-colors'
                 >
                   Github
@@ -58,7 +50,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href={`#`}
+                  href={`https://www.francescofera.com/`}
                   className='text-sm hover:text-primary transition-colors'
                 >
                   Creator

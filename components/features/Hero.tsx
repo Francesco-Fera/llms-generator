@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -15,12 +16,11 @@ export default function Hero() {
           <code>llms.txt</code> in seconds—for free.
         </p>
         <div className='flex justify-center flex-wrap gap-4'>
-          <Button variant='default' size='lg'>
-            Learn more about <code>llms.txt</code>{" "}
-            <ArrowRight className='ml-2 h-4 w-4' />
-          </Button>
-          <Button variant='outline' size='lg'>
-            Understand LLMs SEO <ArrowRight className='ml-2 h-4 w-4' />
+          <Button variant='default' size='lg' asChild>
+            <Link href={"https://llmstxt.org/"} target='_blank'>
+              Learn more about <code>llms.txt</code>{" "}
+              <ArrowRight className='ml-2 h-4 w-4' />
+            </Link>
           </Button>
         </div>
       </div>
